@@ -138,6 +138,8 @@ context('Create and Search Route', () => {
     cy.visit('/');
     cy.contains('Route').click();
     // full match
+    // expand search
+    cy.get(selector.expandSearch).click();
     cy.get(selector.pathSearchInput).type(data.uris1);
     cy.contains('Search').click();
     cy.contains(data.uris1).should('contain', data.uris1);
@@ -185,6 +187,7 @@ context('Create and Search Route', () => {
         force: true,
         multiple: true,
       });
+      cy.wait(timeout);
     }
   });
 });

@@ -40,7 +40,7 @@ export const fetchItem = (rid: number) =>
   request(`/routes/${rid}`).then((data) => transformRouteData(data.data));
 
 export const fetchList = ({ current = 1, pageSize = 10, ...res }) => {
-  const { labels = [], API_VERSION = [], status } = res;
+  const { labels = [], API_VERSION = [], host = "", id = "", desc = "", status} = res;
 
   return request<Res<ResListData<RouteModule.ResponseBody>>>('/routes', {
     params: {
@@ -50,6 +50,9 @@ export const fetchList = ({ current = 1, pageSize = 10, ...res }) => {
       page: current,
       page_size: pageSize,
       status,
+      host,
+      desc,
+      id,
     },
   }).then(({ data }) => {
     return {
